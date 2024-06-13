@@ -1,0 +1,16 @@
+name: Greetings
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: "Hello, please note: This repository is only used for the automatic action business of Zeeker Dev Team. Generally, you do not need to open issues here. If this issue is directed by the automatic program, please ignore this prompt."
