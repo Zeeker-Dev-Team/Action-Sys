@@ -7,14 +7,8 @@ on:
 jobs:
   comment:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Add comment to new issue
-      uses: peter-evans/create-or-update-comment@v1
+    - uses: ben-z/actions-comment-on-issue@1.0.2
       with:
-        issue-number: ${{ github.event.issue.number }}
-        body: |
-          Thank you for opening an issue! We will look into this shortly.
+        message: "Hello, please note: This repository is only used for the automatic action business of Zeeker Dev Team. Generally, you do not need to open issues here. If this issue is directed by the automatic program, please ignore this prompt."
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
