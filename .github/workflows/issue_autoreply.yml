@@ -1,14 +1,15 @@
-name: Auto Comment on New Issue
+name: Auto Create Chat Room
 
 on:
   issues:
     types: [opened]
 
 jobs:
-  comment:
+  chattery:
+    name: chattery
     runs-on: ubuntu-latest
     steps:
-    - uses: ben-z/actions-comment-on-issue@1.0.2
-      with:
-        message: "Hello, please note: This repository is only used for the automatic action business of Zeeker Dev Team. Generally, you do not need to open issues here. If this issue is directed by the automatic program, please ignore this prompt."
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: post comment
+        uses: lukejacksonn/chattery@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
