@@ -1,24 +1,16 @@
-name: Auto Reply to New Issues
+name: Greetings
 
 on:
   issues:
     types: [opened]
 
 jobs:
-  auto-reply:
+  greeting:
     runs-on: ubuntu-latest
-
+    permissions:
+      issues: write
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Auto reply to new issues
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        ISSUE_NUMBER=$(jq -r .issue.number < "$GITHUB_EVENT_PATH")
-        curl -X POST \
-          -H "Authorization: token $GITHUB_TOKEN" \
-          -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ github.repository }}/issues/$ISSUE_NUMBER/comments \
-          -d '{"body":"Hello, please note: This repository is only used for the automatic action business of Zeeker Dev Team. Generally, you do not need to open issues here. If this issue is directed by the automatic program, please ignore this prompt."}'
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: "Hello, please note: This repository is only used for the automatic action business of Zeeker Dev Team. Generally, you do not need to open issues here. If this issue is directed by the automatic program, please ignore this prompt."
